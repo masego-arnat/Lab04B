@@ -8,32 +8,32 @@ public class Lab04 {
         Scanner input = new Scanner(System.in);
 
         System.out.print("Enter Number of lines of Program: ");
-        int numOfLines = input.nextInt();
-        input.nextLine(); // consume the newline character
+        int numLines = input.nextInt();
+        input.nextLine();
 
-        for (int i = 1; i <= numOfLines; i++) {
+        for (int i = 1; i <= numLines; i++) {
             System.out.print("Enter String#" + i + ": ");
-            String str = input.nextLine().trim(); // trim leading/trailing spaces
+            String line = input.nextLine().trim();
 
-            StringTokenizer st = new StringTokenizer(str, "+-/* ", true); // tokenize on operators and spaces
-            int count = 0; // initialize token count
-
-            System.out.println("Output = ");
-            while (st.hasMoreTokens()) {
-                String token = st.nextToken();
-                if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
-                    System.out.println("TOKEN#" + (++count) + " " + token + " operator");
-                } else if (!token.equals(" ")) {
-                    System.out.println("TOKEN#" + (++count) + " " + token + " Identifier");
+            String[] tokens = line.split("\\s+");
+            System.out.println("Output =");
+            int count = 0;
+            for (String token : tokens) {
+                count++;
+                String attribute;
+                if (token.matches("[A-D]")) {
+                    attribute = "Identifier";
+                } else {
+                    attribute = "operator";
                 }
+                System.out.println("TOKEN#" + count + " " + token + " " + attribute);
             }
-
             System.out.println("TOTAL NUMBER OF TOKENS FOR STRING#" + i + ":" + count);
             System.out.println("END OF STRING#" + i);
             System.out.println("===================");
         }
 
-   }
- 
+        input.close();
+    }
 
 }
